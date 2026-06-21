@@ -15,8 +15,8 @@ venv/
 .vscode/
 
 # Data and models
-dataset/*.csv
-dataset/*.xlsx
+## dataset/*.csv
+## dataset/*.xlsx
 models/
 
 # System

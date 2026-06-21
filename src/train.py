@@ -7,6 +7,7 @@ from sklearn.metrics import classification_report, accuracy_score
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import LabelEncoder
+from sklearn.multiclass import OneVsRestClassifier
 import joblib
 
 
@@ -39,7 +40,8 @@ def build_pipeline() -> Pipeline:
     return Pipeline(
         [
             ("tfidf", TfidfVectorizer(stop_words="english", max_df=0.8)),
-            ("clf", LogisticRegression(max_iter=1000, solver="liblinear")),
+            # wrap LogisticRegression in OneVsRest to support multiclass for this sklearn
+            ("clf", OneVsRestClassifier(LogisticRegression(max_iter=1000, solver="liblinear", random_state=42))),
         ]
     )
 
